@@ -59,6 +59,7 @@ const Category = styled(NavLink)`
   &:hover {
     color: #495057;
   }
+
   ${(props) =>
     props.$active &&
     css`
@@ -67,7 +68,6 @@ const Category = styled(NavLink)`
       color: #22b8cf;
       &:hover {
         color: #3bc9db;
-        // border-bottom: 2px solid #6495ED;
       }
     `}
 
@@ -80,18 +80,18 @@ const Categories = () => {
   const location = useLocation();
   return (
     <CategoriesBlock>
-      {categories.map((C) => {
+      {categories.map((c) => {
         const isActive =
-          C.name === "all"
+          c.name === "all"
             ? location.pathname === "/"
-            : location.pathname === `/${C.name}`;
+            : location.pathname === `/${c.name}`;
         return (
           <Category
-            key={C.name}
-            active={isActive}
-            to={C.name === "all" ? "/" : `/${C.name}`}
+            key={c.name}
+            $active={isActive} // 전달되는 prop은 '$active'입니다.
+            to={c.name === "all" ? "/" : `/${c.name}`}
           >
-            {C.text}
+            {c.text}
           </Category>
         );
       })}
